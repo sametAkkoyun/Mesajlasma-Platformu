@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="DBBB1ModelStoreContainer" CdmEntityContainer="DBBB1Entities">
+    <EntitySetMapping Name="gruplar">
+      <EntityTypeMapping TypeName="DBBB1Model.gruplar">
+        <MappingFragment StoreEntitySet="gruplar">
+          <ScalarProperty Name="grupId" ColumnName="grupId" />
+          <ScalarProperty Name="grupAdi" ColumnName="grupAdi" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="mesajlar">
+      <EntityTypeMapping TypeName="DBBB1Model.mesajlar">
+        <MappingFragment StoreEntitySet="mesajlar">
+          <ScalarProperty Name="mesajId" ColumnName="mesajId" />
+          <ScalarProperty Name="mesajMetni" ColumnName="mesajMetni" />
+          <ScalarProperty Name="mesajTarih" ColumnName="mesajTarih" />
+          <ScalarProperty Name="mesajGrupId" ColumnName="mesajGrupId" />
+          <ScalarProperty Name="mesajUyeId" ColumnName="mesajUyeId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="uyeler">
+      <EntityTypeMapping TypeName="DBBB1Model.uyeler">
+        <MappingFragment StoreEntitySet="uyeler">
+          <ScalarProperty Name="uyeId" ColumnName="uyeId" />
+          <ScalarProperty Name="uyeAdsoyad" ColumnName="uyeAdsoyad" />
+          <ScalarProperty Name="uyeKadi" ColumnName="uyeKadi" />
+          <ScalarProperty Name="uyeParola" ColumnName="uyeParola" />
+          <ScalarProperty Name="uyeMail" ColumnName="uyeMail" />
+          <ScalarProperty Name="uyeYetki" ColumnName="uyeYetki" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

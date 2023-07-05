@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="b99f3d9f60a942ceb73525c054b00b58" Name="Diagram1">
+        <EntityTypeShape EntityType="DBBB1Model.gruplar" Width="1.5" PointX="4.25" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBBB1Model.mesajlar" Width="1.5" PointX="6.375" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBBB1Model.uyeler" Width="1.5" PointX="2.125" PointY="1.125" IsExpanded="true" />
+        <AssociationConnector Association="DBBB1Model.FK_mesajlar_Togruplar" ManuallyRouted="false" />
+        <AssociationConnector Association="DBBB1Model.FK_mesajlar_Touyeler" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

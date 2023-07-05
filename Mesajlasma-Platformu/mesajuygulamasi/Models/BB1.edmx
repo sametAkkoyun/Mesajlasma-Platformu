@@ -1,0 +1,215 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="DBBB1Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="gruplar">
+          <Key>
+            <PropertyRef Name="grupId" />
+          </Key>
+          <Property Name="grupId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="grupAdi" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="mesajlar">
+          <Key>
+            <PropertyRef Name="mesajId" />
+          </Key>
+          <Property Name="mesajId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="mesajMetni" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="mesajTarih" Type="datetime" Nullable="false" />
+          <Property Name="mesajGrupId" Type="int" Nullable="false" />
+          <Property Name="mesajUyeId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="uyeler">
+          <Key>
+            <PropertyRef Name="uyeId" />
+          </Key>
+          <Property Name="uyeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="uyeAdsoyad" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="uyeKadi" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="uyeParola" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="uyeMail" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="uyeYetki" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_mesajlar_Togruplar">
+          <End Role="gruplar" Type="Self.gruplar" Multiplicity="1" />
+          <End Role="mesajlar" Type="Self.mesajlar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="gruplar">
+              <PropertyRef Name="grupId" />
+            </Principal>
+            <Dependent Role="mesajlar">
+              <PropertyRef Name="mesajGrupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_mesajlar_Touyeler">
+          <End Role="uyeler" Type="Self.uyeler" Multiplicity="1" />
+          <End Role="mesajlar" Type="Self.mesajlar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="uyeler">
+              <PropertyRef Name="uyeId" />
+            </Principal>
+            <Dependent Role="mesajlar">
+              <PropertyRef Name="mesajUyeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DBBB1ModelStoreContainer">
+          <EntitySet Name="gruplar" EntityType="Self.gruplar" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="mesajlar" EntityType="Self.mesajlar" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="uyeler" EntityType="Self.uyeler" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_mesajlar_Togruplar" Association="Self.FK_mesajlar_Togruplar">
+            <End Role="gruplar" EntitySet="gruplar" />
+            <End Role="mesajlar" EntitySet="mesajlar" />
+          </AssociationSet>
+          <AssociationSet Name="FK_mesajlar_Touyeler" Association="Self.FK_mesajlar_Touyeler">
+            <End Role="uyeler" EntitySet="uyeler" />
+            <End Role="mesajlar" EntitySet="mesajlar" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DBBB1Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="gruplar">
+          <Key>
+            <PropertyRef Name="grupId" />
+          </Key>
+          <Property Name="grupId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="grupAdi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="mesajlar" Relationship="Self.FK_mesajlar_Togruplar" FromRole="gruplar" ToRole="mesajlar" />
+        </EntityType>
+        <EntityType Name="mesajlar">
+          <Key>
+            <PropertyRef Name="mesajId" />
+          </Key>
+          <Property Name="mesajId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="mesajMetni" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="mesajTarih" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="mesajGrupId" Type="Int32" Nullable="false" />
+          <Property Name="mesajUyeId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="gruplar" Relationship="Self.FK_mesajlar_Togruplar" FromRole="mesajlar" ToRole="gruplar" />
+          <NavigationProperty Name="uyeler" Relationship="Self.FK_mesajlar_Touyeler" FromRole="mesajlar" ToRole="uyeler" />
+        </EntityType>
+        <EntityType Name="uyeler">
+          <Key>
+            <PropertyRef Name="uyeId" />
+          </Key>
+          <Property Name="uyeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="uyeAdsoyad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="uyeKadi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="uyeParola" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="uyeMail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="uyeYetki" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="mesajlar" Relationship="Self.FK_mesajlar_Touyeler" FromRole="uyeler" ToRole="mesajlar" />
+        </EntityType>
+        <Association Name="FK_mesajlar_Togruplar">
+          <End Role="gruplar" Type="Self.gruplar" Multiplicity="1" />
+          <End Role="mesajlar" Type="Self.mesajlar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="gruplar">
+              <PropertyRef Name="grupId" />
+            </Principal>
+            <Dependent Role="mesajlar">
+              <PropertyRef Name="mesajGrupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_mesajlar_Touyeler">
+          <End Role="uyeler" Type="Self.uyeler" Multiplicity="1" />
+          <End Role="mesajlar" Type="Self.mesajlar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="uyeler">
+              <PropertyRef Name="uyeId" />
+            </Principal>
+            <Dependent Role="mesajlar">
+              <PropertyRef Name="mesajUyeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DBBB1Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="gruplar" EntityType="Self.gruplar" />
+          <EntitySet Name="mesajlar" EntityType="Self.mesajlar" />
+          <EntitySet Name="uyeler" EntityType="Self.uyeler" />
+          <AssociationSet Name="FK_mesajlar_Togruplar" Association="Self.FK_mesajlar_Togruplar">
+            <End Role="gruplar" EntitySet="gruplar" />
+            <End Role="mesajlar" EntitySet="mesajlar" />
+          </AssociationSet>
+          <AssociationSet Name="FK_mesajlar_Touyeler" Association="Self.FK_mesajlar_Touyeler">
+            <End Role="uyeler" EntitySet="uyeler" />
+            <End Role="mesajlar" EntitySet="mesajlar" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DBBB1ModelStoreContainer" CdmEntityContainer="DBBB1Entities">
+          <EntitySetMapping Name="gruplar">
+            <EntityTypeMapping TypeName="DBBB1Model.gruplar">
+              <MappingFragment StoreEntitySet="gruplar">
+                <ScalarProperty Name="grupId" ColumnName="grupId" />
+                <ScalarProperty Name="grupAdi" ColumnName="grupAdi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="mesajlar">
+            <EntityTypeMapping TypeName="DBBB1Model.mesajlar">
+              <MappingFragment StoreEntitySet="mesajlar">
+                <ScalarProperty Name="mesajId" ColumnName="mesajId" />
+                <ScalarProperty Name="mesajMetni" ColumnName="mesajMetni" />
+                <ScalarProperty Name="mesajTarih" ColumnName="mesajTarih" />
+                <ScalarProperty Name="mesajGrupId" ColumnName="mesajGrupId" />
+                <ScalarProperty Name="mesajUyeId" ColumnName="mesajUyeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="uyeler">
+            <EntityTypeMapping TypeName="DBBB1Model.uyeler">
+              <MappingFragment StoreEntitySet="uyeler">
+                <ScalarProperty Name="uyeId" ColumnName="uyeId" />
+                <ScalarProperty Name="uyeAdsoyad" ColumnName="uyeAdsoyad" />
+                <ScalarProperty Name="uyeKadi" ColumnName="uyeKadi" />
+                <ScalarProperty Name="uyeParola" ColumnName="uyeParola" />
+                <ScalarProperty Name="uyeMail" ColumnName="uyeMail" />
+                <ScalarProperty Name="uyeYetki" ColumnName="uyeYetki" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram DiagramId="de7e61251de24d82bc4619455ee9d7a7" Name="Diagram1">
+        <EntityTypeShape EntityType="DBBB1Model.gruplar" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBBB1Model.mesajlar" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBBB1Model.uyeler" Width="1.5" PointX="0.75" PointY="5" IsExpanded="true" />
+        <AssociationConnector Association="DBBB1Model.FK_mesajlar_Togruplar" ManuallyRouted="false" />
+        <AssociationConnector Association="DBBB1Model.FK_mesajlar_Touyeler" ManuallyRouted="false" />
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>
